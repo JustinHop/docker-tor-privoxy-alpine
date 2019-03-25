@@ -1,0 +1,15 @@
+[Unit]
+Description=Tor and privoxy container
+Requires=docker.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull jhoppensteadt/tor-privoxy-alpine
+ExecStart=/usr/bin/docker run --rm --name %n -p 8118:8118 -p 9050:9050 jhoppensteadt/tor-privoxy-alpine
+
+[Install]
+WantedBy=multi-user.target

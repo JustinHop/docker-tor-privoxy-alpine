@@ -1,8 +1,8 @@
-FROM alpine:3.7
+FROM alpine:3.9
 
 EXPOSE 8118 9050
 
-RUN apk --update add privoxy tor runit tini
+RUN apk --no-cache add privoxy tor runit tini
 
 COPY service /etc/service/
 
